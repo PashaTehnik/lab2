@@ -5,16 +5,32 @@
 #ifndef UNTITLED2_HASHTABLE_H
 #define UNTITLED2_HASHTABLE_H
 
+#include <vector>
+#include <list>
+
 struct Student {
     unsigned age;
     unsigned weight;
 };
 
+using namespace std;
+
 typedef std::string Key;
 typedef Student Value;
 
+int hash(const Key& s, int table_size);
+
 class HashTable
 {
+    const int default_len = 8, //default len of vector
+              rehash_size = 8; //size to rehash
+    vector<list<pair<Key, Value>>*> arr;
+    int vectors_len, //len of vector
+         table_size; //count elems
+    Value mask_student{};
+
+    void resize();
+
 public:
     HashTable();
     ~HashTable();
@@ -41,6 +57,7 @@ public:
     const Value& at(const Key& k) const;
     size_t size() const;
     bool empty() const;
+
     friend bool operator==(const HashTable& a, const HashTable& b);
 
     friend bool operator!=(const HashTable& a, const HashTable& b);
