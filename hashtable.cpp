@@ -32,8 +32,8 @@ void HashTable::resize(){
 }
 
 HashTable::HashTable() {
-    mask_student.weight = 0;
-    mask_student.age = 0;
+    mask_student.weight = 77;
+    mask_student.age = 77;
     vectors_len = default_len;
     table_size = 0;
     list<pair<Key, Value>>* elem = nullptr;
@@ -78,6 +78,7 @@ HashTable& HashTable::operator=(HashTable &&b){
     vectors_len = b.vectors_len;
     table_size = b.table_size;
     arr = b.arr;
+    b.table_size = 0;
     for(auto it : b.arr){
         it = nullptr;
     }
@@ -157,17 +158,7 @@ Value& HashTable::operator[](const Key &name) {
     return mask_student;
 }
 
-Value& HashTable::at(const Key& name){
-    if (contains(name)){
-        int h = ::hash(name, vectors_len);
-        for (auto & it : *arr[h]){
-            if (it.first == name){
-                return it.second;
-            }
-        }
-    }
-    throw invalid_argument("This student was not found");
-}
+
 
 const Value &HashTable::at(const Key &name) const {
     if (contains(name)){

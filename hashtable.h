@@ -53,7 +53,6 @@ public:
 // значение, созданное конструктором по умолчанию и вернуть ссылку на него.
     Value& operator[](const Key& k);
 // Возвращает значение по ключу. Бросает исключение при неудаче.
-    Value& at(const Key& k);
     const Value& at(const Key& k) const;
     size_t size() const;
     bool empty() const;
