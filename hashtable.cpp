@@ -177,7 +177,10 @@ size_t HashTable::size() const {
 }
 
 bool HashTable::empty() const {
-    return ((table_size == 0) ? true : false);
+    for (const auto it : arr) {
+        if (it != nullptr) return false;
+    }
+    return true;
 }
 
 bool operator==(const HashTable &a, const HashTable &b) {
